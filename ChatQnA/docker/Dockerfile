@@ -15,11 +15,11 @@ RUN useradd -m -s /bin/bash user && \
     mkdir -p /home/user && \
     chown -R user /home/user/
 
-RUN cd /home/user/ && \
-    git clone https://github.com/opea-project/GenAIComps.git
+COPY ./GenAIComps /home/user/GenAIComps
 
 RUN cd /home/user/GenAIComps && pip install --no-cache-dir --upgrade pip && \
-    pip install -r /home/user/GenAIComps/requirements.txt
+    pip install -r /home/user/GenAIComps/requirements.txt && \
+    pip install pytz
 
 COPY ./chatqna.py /home/user/chatqna.py
 
